@@ -312,7 +312,25 @@ QPlotWidget{
 
 QCheckBox{
 	font-size: 18px;
-}</string>
+}
+/*----------------------------------------------------------------------------------------------*/
+QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_4">
@@ -471,7 +489,7 @@ QCheckBox{
            <item row="4" column="0">
             <widget class="QPushButton" name="anesthesia_btn">
              <property name="text">
-              <string>Anesthesia and Recovery</string>
+              <string>Sterilization and Recovery</string>
              </property>
             </widget>
            </item>
@@ -580,6 +598,11 @@ QCheckBox{
                </property>
                <item row="0" column="0">
                 <widget class="QTabWidget" name="operation_tabWidget">
+                 <property name="styleSheet">
+                  <string notr="true">QTabBar::tab {
+	width:200px;
+}</string>
+                 </property>
                  <property name="currentIndex">
                   <number>0</number>
                  </property>
@@ -603,23 +626,7 @@ QCheckBox{
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="defibrilator_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -653,36 +660,347 @@ border: 1px solid #ccc;
                   <attribute name="title">
                    <string>Diathermy</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_11">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="diathermy_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_10">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_3">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_diathermy_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="electrosurg_tab">
+                 <widget class="QWidget" name="electrosurgery_tab">
                   <attribute name="title">
-                   <string>Electrosurg</string>
+                   <string>Electrosurgery</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_13">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="electrosurgery_table">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_12">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_5">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_electrosurgery_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="monitor_tab">
+                 <widget class="QWidget" name="monitor_operation_tab">
                   <attribute name="title">
                    <string>Monitor</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_14">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="monitor_operation_table">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_4">
+                     <item>
+                      <spacer name="horizontalSpacer_6">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_monitor_operation_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                  <widget class="QWidget" name="suction_tab">
                   <attribute name="title">
                    <string>Suction</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_15">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="suction_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                     <item>
+                      <spacer name="horizontalSpacer_7">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_suction_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="ultrasound_tab">
+                 <widget class="QWidget" name="ultrasound_operation_tab">
                   <attribute name="title">
                    <string>Ultrasound</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_16">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="ultrasound_operation_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_6">
+                     <item>
+                      <spacer name="horizontalSpacer_8">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_ultrasound_operation_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                  <widget class="QWidget" name="vaporizer_tab">
                   <attribute name="title">
                    <string>Vaporizer</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_17">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="vaporizer_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_7">
+                     <item>
+                      <spacer name="horizontalSpacer_9">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_vaporizer_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                  <widget class="QWidget" name="ventilator_tab">
                   <attribute name="title">
                    <string>Ventilator</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_18">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="ventilator_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                     <item>
+                      <spacer name="horizontalSpacer_10">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_ventilator_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                 </widget>
                </item>
@@ -710,6 +1028,14 @@ border: 1px solid #ccc;
                </property>
                <item row="0" column="0">
                 <widget class="QTabWidget" name="clinics_tabWidget">
+                 <property name="styleSheet">
+                  <string notr="true">QTabBar::tab {
+	width:250px;
+}</string>
+                 </property>
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
                  <property name="documentMode">
                   <bool>true</bool>
                  </property>
@@ -722,28 +1048,187 @@ border: 1px solid #ccc;
                  <property name="tabBarAutoHide">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="tab_8">
+                 <widget class="QWidget" name="sphygmomanometer_tab">
                   <attribute name="title">
-                   <string>Tab 1</string>
+                   <string>Sphygmomanometer</string>
                   </attribute>
+                  <widget class="QTableWidget" name="sphygmomanometer_table">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>20</y>
+                     <width>1030</width>
+                     <height>572</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                   </property>
+                  </widget>
+                  <widget class="QWidget" name="layoutWidget_22">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>599</y>
+                     <width>1030</width>
+                     <height>40</height>
+                    </rect>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_48">
+                    <item row="0" column="0">
+                     <spacer name="horizontalSpacer_26">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QPushButton" name="add_sphygmomanometer_btn">
+                      <property name="text">
+                       <string>Add device</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
                  </widget>
-                 <widget class="QWidget" name="tab_10">
+                 <widget class="QWidget" name="ecg_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>ECG</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_46">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="ecg_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_45">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_24">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_ecg_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_9">
+                 <widget class="QWidget" name="ultrasound_clinics_tab">
                   <attribute name="title">
-                   <string>Tab 2</string>
+                   <string>Ultrasound</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_44">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="ultrasound_clinics_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_43">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_23">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_ultrasound_clinics_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                 </widget>
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="anesthesia_tab">
+             <widget class="QWidget" name="sterilization_tab">
               <attribute name="title">
-               <string>Anesthesia</string>
+               <string>Sterilization</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_7">
                <property name="leftMargin">
@@ -762,7 +1247,15 @@ border: 1px solid #ccc;
                 <number>0</number>
                </property>
                <item row="0" column="0">
-                <widget class="QTabWidget" name="anesthesia_tabWidget">
+                <widget class="QTabWidget" name="sterilization_tabWidget">
+                 <property name="styleSheet">
+                  <string notr="true">QTabBar::tab {
+	width:250px;
+}</string>
+                 </property>
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
                  <property name="documentMode">
                   <bool>true</bool>
                  </property>
@@ -775,25 +1268,275 @@ border: 1px solid #ccc;
                  <property name="tabBarAutoHide">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="tab_6">
+                 <widget class="QWidget" name="ecg_sterilization_tab">
                   <attribute name="title">
-                   <string>Tab 1</string>
+                   <string>ECG</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_42">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="ecg_sterilization_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_41">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_22">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_ecg_sterilization_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_12">
+                 <widget class="QWidget" name="sphygmomanometer_sterilization_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>Sphygmomanometer</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_40">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="sphygmomanometer_sterilization_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_39">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_21">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_sphygmomanometer_sterilization_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_13">
+                 <widget class="QWidget" name="monitor_sterilization_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>Monitor</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_38">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="monitor_sterilization_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_37">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_20">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_monitor_sterilization_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_11">
+                 <widget class="QWidget" name="autoclave_tab">
                   <attribute name="title">
-                   <string>Tab 2</string>
+                   <string>Autoclave</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_36">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="autoclave_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_35">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_19">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_autoclave_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="incubator_tab">
+                  <attribute name="title">
+                   <string>Incubator</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_34">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="incubator_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_33">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_18">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_incubator_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                 </widget>
                </item>
@@ -821,8 +1564,13 @@ border: 1px solid #ccc;
                </property>
                <item row="0" column="0">
                 <widget class="QTabWidget" name="blood_tabWidget">
+                 <property name="styleSheet">
+                  <string notr="true">QTabBar::tab {
+	width:200px;
+}</string>
+                 </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>2</number>
                  </property>
                  <property name="elideMode">
                   <enum>Qt::ElideMiddle</enum>
@@ -839,30 +1587,221 @@ border: 1px solid #ccc;
                  <property name="tabBarAutoHide">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="tab_14">
+                 <widget class="QWidget" name="centrifuge_tab">
                   <attribute name="title">
-                   <string>Tab 1</string>
+                   <string>Centrifuge</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_32">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="centrifuge_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_31">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_17">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_centrifuge_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_16">
+                 <widget class="QWidget" name="balance_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>Balance</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_30">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="balance_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_29">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_16">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_balance_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_17">
+                 <widget class="QWidget" name="laminar_blood_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>Laminar Flow</string>
                   </attribute>
+                  <layout class="QGridLayout" name="gridLayout_28">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="laminar_blood_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_27">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_15">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_laminar_blood_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
-                 <widget class="QWidget" name="tab_18">
+                 <widget class="QWidget" name="freezing_tab">
                   <attribute name="title">
-                   <string>Page</string>
+                   <string>Freezing</string>
                   </attribute>
-                 </widget>
-                 <widget class="QWidget" name="tab_15">
-                  <attribute name="title">
-                   <string>Tab 2</string>
-                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_26">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="freezing_tab_2">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_24">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_14">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_freezing_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                 </widget>
                </item>
@@ -872,6 +1811,155 @@ border: 1px solid #ccc;
               <attribute name="title">
                <string>IVF lab</string>
               </attribute>
+              <layout class="QGridLayout" name="gridLayout_19">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QTabWidget" name="IVF_tabWidget">
+                 <property name="styleSheet">
+                  <string notr="true">QTabBar::tab {
+	width:250px;
+}</string>
+                 </property>
+                 <property name="currentIndex">
+                  <number>1</number>
+                 </property>
+                 <property name="documentMode">
+                  <bool>true</bool>
+                 </property>
+                 <property name="tabsClosable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="movable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="tabBarAutoHide">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="laminar_IVF_tab">
+                  <attribute name="title">
+                   <string>Laminer Flow</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_21">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="laminar_IVF_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_20">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_11">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_laminar_IVF_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="thermometer_tab">
+                  <attribute name="title">
+                   <string>Digital Thermometer</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_23">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="thermometer_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_22">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_12">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_thermometer_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </widget>
            </item>
