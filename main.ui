@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1186</width>
+    <width>1335</width>
     <height>802</height>
    </rect>
   </property>
@@ -284,7 +284,7 @@ QTabBar::tab {
     border-radius: 10px;
     padding: 5px;
     color: #E0E1E3;
-	width:100px;
+	width:150px;
     font-family: Ubuntu;
     font-size: 20px;
     font-weight: bold;
@@ -377,6 +377,10 @@ QCheckBox{
            <property name="text">
             <string>open left frame</string>
            </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/brightness.svg</normaloff>icons/brightness.svg</iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="4">
@@ -457,31 +461,38 @@ QCheckBox{
            <property name="bottomMargin">
             <number>7</number>
            </property>
-           <item row="0" column="0">
-            <widget class="QPushButton" name="pushButton">
+           <item row="6" column="0">
+            <widget class="QPushButton" name="IVF_btn">
              <property name="text">
-              <string>PushButton</string>
+              <string>IVF lab</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="anesthesia_btn">
+             <property name="text">
+              <string>Anesthesia and Recovery</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="clinics_btn">
              <property name="text">
-              <string>PushButton</string>
+              <string>Clinics</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="pushButton_3">
+           <item row="5" column="0">
+            <widget class="QPushButton" name="blood_btn">
              <property name="text">
-              <string>PushButton</string>
+              <string>Blood and Andrology </string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QPushButton" name="pushButton_4">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="operation_btn">
              <property name="text">
-              <string>PushButton</string>
+              <string>Operations </string>
              </property>
             </widget>
            </item>
@@ -522,7 +533,7 @@ QCheckBox{
             <number>0</number>
            </property>
            <item row="0" column="0">
-            <widget class="QTabWidget" name="tabWidget">
+            <widget class="QTabWidget" name="main_tabWidget">
              <property name="tabShape">
               <enum>QTabWidget::Rounded</enum>
              </property>
@@ -547,13 +558,31 @@ QCheckBox{
              <property name="tabBarAutoHide">
               <bool>false</bool>
              </property>
-             <widget class="QWidget" name="tab">
+             <widget class="QWidget" name="operation_tab">
               <attribute name="title">
-               <string>Tab 1</string>
+               <string>Operation</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_5">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
-                <widget class="QTabWidget" name="tabWidget_2">
+                <widget class="QTabWidget" name="operation_tabWidget">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
                  <property name="documentMode">
                   <bool>true</bool>
                  </property>
@@ -566,27 +595,121 @@ QCheckBox{
                  <property name="tabBarAutoHide">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="tab_2">
+                 <widget class="QWidget" name="defibrilator_tab">
                   <attribute name="title">
-                   <string>Tab 1</string>
+                   <string>Defibrilator</string>
+                  </attribute>
+                  <layout class="QGridLayout" name="gridLayout_9">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="defibrilator_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QHBoxLayout" name="horizontalLayout_2">
+                     <item>
+                      <spacer name="horizontalSpacer_2">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="add_defibrilator_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="diathermy_tab">
+                  <attribute name="title">
+                   <string>Diathermy</string>
                   </attribute>
                  </widget>
-                 <widget class="QWidget" name="tab_7">
+                 <widget class="QWidget" name="electrosurg_tab">
                   <attribute name="title">
-                   <string>Tab 2</string>
+                   <string>Electrosurg</string>
+                  </attribute>
+                 </widget>
+                 <widget class="QWidget" name="monitor_tab">
+                  <attribute name="title">
+                   <string>Monitor</string>
+                  </attribute>
+                 </widget>
+                 <widget class="QWidget" name="suction_tab">
+                  <attribute name="title">
+                   <string>Suction</string>
+                  </attribute>
+                 </widget>
+                 <widget class="QWidget" name="ultrasound_tab">
+                  <attribute name="title">
+                   <string>Ultrasound</string>
+                  </attribute>
+                 </widget>
+                 <widget class="QWidget" name="vaporizer_tab">
+                  <attribute name="title">
+                   <string>Vaporizer</string>
+                  </attribute>
+                 </widget>
+                 <widget class="QWidget" name="ventilator_tab">
+                  <attribute name="title">
+                   <string>Ventilator</string>
                   </attribute>
                  </widget>
                 </widget>
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_3">
+             <widget class="QWidget" name="clinics_tab">
               <attribute name="title">
-               <string>Page</string>
+               <string>Clinics</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_6">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
-                <widget class="QTabWidget" name="tabWidget_3">
+                <widget class="QTabWidget" name="clinics_tabWidget">
                  <property name="documentMode">
                   <bool>true</bool>
                  </property>
@@ -618,13 +741,28 @@ QCheckBox{
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_4">
+             <widget class="QWidget" name="anesthesia_tab">
               <attribute name="title">
-               <string>Page</string>
+               <string>Anesthesia</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_7">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
-                <widget class="QTabWidget" name="tabWidget_4">
+                <widget class="QTabWidget" name="anesthesia_tabWidget">
                  <property name="documentMode">
                   <bool>true</bool>
                  </property>
@@ -661,13 +799,28 @@ QCheckBox{
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_5">
+             <widget class="QWidget" name="blood_tab">
               <attribute name="title">
-               <string>Page</string>
+               <string>Blood lab</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_8">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
-                <widget class="QTabWidget" name="tabWidget_5">
+                <widget class="QTabWidget" name="blood_tabWidget">
                  <property name="currentIndex">
                   <number>0</number>
                  </property>
@@ -714,6 +867,11 @@ QCheckBox{
                 </widget>
                </item>
               </layout>
+             </widget>
+             <widget class="QWidget" name="IVF_tab">
+              <attribute name="title">
+               <string>IVF lab</string>
+              </attribute>
              </widget>
             </widget>
            </item>

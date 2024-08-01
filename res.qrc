@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/volume.svg</file>
+    <file>icons/volume-mute.svg</file>
+    <file>icons/volume-slash.svg</file>
     <file>icons/camera-viewfinder copy.svg</file>
     <file>icons/camera-viewfinder.svg</file>
     <file>icons/eye copy.svg</file>
@@ -17,6 +20,7 @@
     <file>icons/diskette.png</file>
     <file>icons/disketteF.png</file>
     <file>icons/down copy.svg</file>
+    <file>icons/down copy.png</file>
     <file>icons/down.svg</file>
     <file>icons/export.png</file>
     <file>icons/exportF.png</file>
@@ -288,5 +292,17 @@
     <file>icons/new-documentF.png</file>
     <file>icons/open-folderF.png</file>
     <file>icons/open-folder.png</file>
+    <file>icons/cow.png</file>
+    <file>icons/dolphin.png</file>
+    <file>icons/elephant.png</file>
+    <file>icons/flute.png</file>
+    <file>icons/frog-.png</file>
+    <file>icons/goat.png</file>
+    <file>icons/guitar.png</file>
+    <file>icons/horse.png</file>
+    <file>icons/piano.png</file>
+    <file>icons/trumpet.png</file>
+    <file>icons/wolf.png</file>
+    <file>icons/bin.png</file>
   </qresource>
 </RCC>
