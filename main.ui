@@ -357,19 +357,29 @@ border: 1px solid #ccc;
       <item>
        <widget class="QFrame" name="upper_frame">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>60</height>
+         </size>
+        </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QFrame {
+background-color:#0F151C;
+    border: 0; /* Remove default border if any */
+    border-bottom: 1px solid #E0E1E3; /* Add a 2-pixel solid black line at the bottom */
+}</string>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::VLine</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
+         <enum>QFrame::Plain</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <property name="leftMargin">
@@ -392,33 +402,125 @@ border: 1px solid #ccc;
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+ background-color: transparent;
+}
+
+QPushButton::hover{
+ border: 1px solid #176B87;
+}
+QPushButton:pressed {
+ margin:1px 2px;
+ font-size: 15px;
+}
+</string>
+           </property>
            <property name="text">
-            <string>open left frame</string>
+            <string/>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>icons/brightness.svg</normaloff>icons/brightness.svg</iconset>
+             <normaloff>icons/white-sidebar.svg</normaloff>icons/white-sidebar.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>60</width>
+             <height>60</height>
+            </size>
            </property>
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="close_btn">
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+ background-color: transparent;
+}
+
+
+QPushButton:pressed {
+ margin:1px 2px;
+ font-size: 15px;
+}
+</string>
+           </property>
            <property name="text">
-            <string>close</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/white-cross.svg</normaloff>icons/white-cross.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>60</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="minimize_btn">
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
-            <string>minmize</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/white-minimize.svg</normaloff>icons/white-minimize.svg</iconset>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="restore_btn">
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
-            <string>maxmize</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>icons/white-maximize (1).svg</normaloff>icons/white-maximize (1).svg</iconset>
            </property>
           </widget>
          </item>
@@ -446,19 +548,25 @@ border: 1px solid #ccc;
         <item>
          <widget class="QFrame" name="left_frame">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>500</width>
+            <width>0</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">background-color:#0F151C;</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -468,7 +576,7 @@ border: 1px solid #ccc;
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <property name="leftMargin">
-            <number>7</number>
+            <number>19</number>
            </property>
            <property name="topMargin">
             <number>7</number>
@@ -481,6 +589,22 @@ border: 1px solid #ccc;
            </property>
            <item row="6" column="0">
             <widget class="QPushButton" name="IVF_btn">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+ background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+padding-left:20px;
+}
+</string>
+             </property>
              <property name="text">
               <string>IVF lab</string>
              </property>
@@ -488,6 +612,22 @@ border: 1px solid #ccc;
            </item>
            <item row="4" column="0">
             <widget class="QPushButton" name="anesthesia_btn">
+             <property name="minimumSize">
+              <size>
+               <width>310</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+ background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+padding-left:20px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Sterilization and Recovery</string>
              </property>
@@ -495,6 +635,22 @@ border: 1px solid #ccc;
            </item>
            <item row="1" column="0">
             <widget class="QPushButton" name="clinics_btn">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+ background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+padding-left:20px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Clinics</string>
              </property>
@@ -502,6 +658,22 @@ border: 1px solid #ccc;
            </item>
            <item row="5" column="0">
             <widget class="QPushButton" name="blood_btn">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+ background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+padding-left:20px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Blood and Andrology </string>
              </property>
@@ -509,8 +681,30 @@ border: 1px solid #ccc;
            </item>
            <item row="0" column="0">
             <widget class="QPushButton" name="operation_btn">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+ background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+padding-left:20px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Operations </string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1034,7 +1228,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>1</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -1048,21 +1242,15 @@ border: 1px solid #ccc;
                  <property name="tabBarAutoHide">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="sphygmomanometer_tab">
+                 <widget class="QWidget" name="sphygmomanometer_clinics_tab">
                   <attribute name="title">
                    <string>Sphygmomanometer</string>
                   </attribute>
-                  <widget class="QTableWidget" name="sphygmomanometer_table">
-                   <property name="geometry">
-                    <rect>
-                     <x>20</x>
-                     <y>20</y>
-                     <width>1030</width>
-                     <height>572</height>
-                    </rect>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QHeaderView::section{
+                  <layout class="QGridLayout" name="gridLayout_25">
+                   <item row="0" column="0">
+                    <widget class="QTableWidget" name="sphygmomanometer_clinics_table">
+                     <property name="styleSheet">
+                      <string notr="true">QHeaderView::section{
 	border: 1px solid #ccc;
 	background-color: rgba(255, 255, 255, 0);
 	font-size: 19px;
@@ -1079,40 +1267,34 @@ QTableWidget::item{
 border: 1px solid #ccc;
 }
 </string>
-                   </property>
-                  </widget>
-                  <widget class="QWidget" name="layoutWidget_22">
-                   <property name="geometry">
-                    <rect>
-                     <x>20</x>
-                     <y>599</y>
-                     <width>1030</width>
-                     <height>40</height>
-                    </rect>
-                   </property>
-                   <layout class="QGridLayout" name="gridLayout_48">
-                    <item row="0" column="0">
-                     <spacer name="horizontalSpacer_26">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QPushButton" name="add_sphygmomanometer_btn">
-                      <property name="text">
-                       <string>Add device</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <layout class="QGridLayout" name="gridLayout_48">
+                     <item row="0" column="0">
+                      <spacer name="horizontalSpacer_26">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="add_sphygmomanometer_clinics_btn">
+                       <property name="text">
+                        <string>Add device</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </widget>
                  <widget class="QWidget" name="ecg_tab">
                   <attribute name="title">
@@ -1254,7 +1436,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>4</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -1755,7 +1937,7 @@ border: 1px solid #ccc;
                   </attribute>
                   <layout class="QGridLayout" name="gridLayout_26">
                    <item row="0" column="0">
-                    <widget class="QTableWidget" name="freezing_tab_2">
+                    <widget class="QTableWidget" name="freezing_table">
                      <property name="styleSheet">
                       <string notr="true">QHeaderView::section{
 	border: 1px solid #ccc;
@@ -1835,7 +2017,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
