@@ -2,14 +2,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer
-import pyqtgraph as pg
-import numpy as np
-import pandas as pd
+# import pyqtgraph as pg
+# import numpy as np
+# import pandas as pd
 import sys
-from pathlib import Path
-# from res_rc import *  # Import the resource module
+# from pathlib import Path
+from res_rc import *  # Import the resource module
 from PyQt5.uic import loadUiType
+from models import *
 
 ui, _ = loadUiType('main.ui')
 
@@ -43,19 +43,51 @@ class MainApp(QMainWindow, ui):
                                     self.add_thermometer_btn, self.add_laminar_IVF_btn, self.add_freezing_btn,
                                     self.add_laminar_blood_btn, self.add_balance_btn, self.add_centrifuge_btn]
 
-        self.handel_buttons()
+        self.side_bar_icons = {
+            'Operations': QIcon('icons/operation.png'),
+            'Clinics': QIcon('icons/clinics.png'),
+            'Sterilization and Recovery': QIcon('icons/anesthesia.png'),
+            'Blood and Andrology': QIcon('icons/blood.png'),
+            'IVF lab': QIcon('icons/ivf.png')
+        }
+
+        self.handle_buttons()
         self.ui_changes()
         self.create_tables()
+
+        self.clickPosition = None
+        # Set the mouse move event handler for upper_frame
+        self.upper_frame.mouseMoveEvent = self.move_window
+
+        # Departmets ids for database
+        self.depts_ids = [
+            "OR", "CL", "SRA", "BAL", "IVF"
+        ]
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.clickPosition = event.globalPos()
+
+    def move_window(self, event):
+        if self.isMaximized():
+            return
+        if event.buttons() == Qt.LeftButton and self.clickPosition is not None:
+            # Move the window
+            self.move(self.pos() + event.globalPos() - self.clickPosition)
+            self.clickPosition = event.globalPos()
+            event.accept()
 
     def ui_changes(self):
         self.main_tabWidget.tabBar().setVisible(False)
 
-    def handel_buttons(self):
+    def handle_buttons(self):
         self.close_left_frame.clicked.connect(self.toggle_side_bar)
 
         # connect each btn in left frame with corresponding tab
         for i, btn in enumerate(self.tab_buttons_list):
             btn.clicked.connect(lambda _, index=i: self.open_tab(index))
+            btn.setIcon(self.side_bar_icons[btn.text()])
+            btn.setIconSize(QSize(40, 40))
 
         # connect each add_row btn with add_row function and with it is table
         for btn, table in zip(self.add_device_btn_list, self.devices_tables_list):
@@ -75,9 +107,12 @@ class MainApp(QMainWindow, ui):
         if win_status == 0:
             WINDOW_SIZE = 1
             self.showMaximized()
+            self.restore_btn.setIcon(QIcon("icons/white-restore.svg"))
         else:
             WINDOW_SIZE = 0
             self.showNormal()
+            self.restore_btn.setIcon(QIcon("icons/white_maximize.svg"))
+
 
     def close_tab(self, index):
         print(index)
@@ -97,18 +132,38 @@ class MainApp(QMainWindow, ui):
             for i in range(3, 5):
                 header.setSectionResizeMode(i, QHeaderView.ResizeToContents)  # Column 3
                 table.setColumnWidth(i, 120)
+            table.setStyleSheet("""
+            QTableWidget {
+                border: none;
+            }
+            QTableWidget::item {
+                border: none;
+            }
+            QHeaderView::section {
+                border: none;
+            }
+            QHeaderView::section:horizontal {
+                border: none;
+                text-align: center;
+            }
+            QHeaderView::section:vertical {
+                border: none;
+                text-align: center;
+            }
+        """)
             self.add_row(table)
 
     def add_row(self, table):
         row = table.rowCount()
         table.setRowCount(row + 1)
-        table.setRowHeight(row, 30)
+        table.setRowHeight(row, 45)
 
         for col in range(5):  # Add buttons to all columns (0, 1, 2, 3)
             if col == 3:  # For the last column (index 3), add the delete button
                 button = QPushButton()
                 button.setObjectName(f'delete_btn{row}')
                 button.setIcon(QIcon('icons/trash copy.svg'))
+                button.setIconSize(QSize(30, 30))
                 button.setStyleSheet(
                     "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
                 table.setCellWidget(row, col, button)
@@ -116,7 +171,8 @@ class MainApp(QMainWindow, ui):
             elif col == 4:
                 button = QPushButton()
                 button.setObjectName(f'delete_btn{row}')
-                button.setIcon(QIcon('icons/trash copy.svg'))
+                button.setIcon(QIcon('icons/open.svg'))
+                button.setIconSize(QSize(30, 30))
                 button.setStyleSheet(
                     "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
                 table.setCellWidget(row, col, button)
@@ -157,9 +213,13 @@ class MainApp(QMainWindow, ui):
     def toggle_side_bar(self):
         width = self.left_frame.width()
         if width == 60:
-            new_width = 300
+            new_width = 350
+            self.close_left_frame.setIcon(
+                QIcon('icons/white_sidebar_fill.svg'))
         else:
             new_width = 60
+            self.close_left_frame.setIcon(
+                QIcon('icons/white_sidebar_stroke.svg'))
         self.animation = QPropertyAnimation(self.left_frame, b"minimumWidth")
         self.animation.setDuration(250)
         self.animation.setStartValue(width)

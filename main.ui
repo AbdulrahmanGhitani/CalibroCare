@@ -426,13 +426,13 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>icons/white-sidebar.svg</normaloff>icons/white-sidebar.svg</iconset>
+            <iconset resource="res.qrc">
+             <normaloff>:/icons/icons/white_sidebar_stroke.svg</normaloff>:/icons/icons/white_sidebar_stroke.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>60</width>
-             <height>60</height>
+             <width>35</width>
+             <height>35</height>
             </size>
            </property>
           </widget>
@@ -441,7 +441,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="close_btn">
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>40</width>
              <height>16777215</height>
             </size>
            </property>
@@ -461,13 +461,13 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>icons/white-cross.svg</normaloff>icons/white-cross.svg</iconset>
+            <iconset resource="res.qrc">
+             <normaloff>:/icons/icons/white-cross.svg</normaloff>:/icons/icons/white-cross.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>60</width>
-             <height>60</height>
+             <width>40</width>
+             <height>40</height>
             </size>
            </property>
            <property name="checkable">
@@ -491,16 +491,25 @@ QPushButton:pressed {
           <widget class="QPushButton" name="minimize_btn">
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>40</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>icons/white-minimize.svg</normaloff>icons/white-minimize.svg</iconset>
+            <iconset resource="res.qrc">
+             <normaloff>:/icons/icons/white_minimize.svg</normaloff>:/icons/icons/white_minimize.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -508,19 +517,27 @@ QPushButton:pressed {
           <widget class="QPushButton" name="restore_btn">
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>40</width>
              <height>16777215</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true">background-color: rgba(255, 255, 255, 0);
+
+</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>icons/white-maximize (1).svg</normaloff>icons/white-maximize (1).svg</iconset>
+            <iconset resource="res.qrc">
+             <normaloff>:/icons/icons/white_maximize.svg</normaloff>:/icons/icons/white_maximize.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -598,10 +615,10 @@ QPushButton:pressed {
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+text-align: left;
+padding-left: -5px;
 }
 </string>
              </property>
@@ -621,10 +638,10 @@ padding-left:20px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+padding-left: -5px;
+text-align: left;
 }
 </string>
              </property>
@@ -644,10 +661,10 @@ padding-left:20px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+text-align: left;
+padding-left: -5px;
 }
 </string>
              </property>
@@ -667,15 +684,15 @@ padding-left:20px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+text-align: left;
+padding-left: -5px;
 }
 </string>
              </property>
              <property name="text">
-              <string>Blood and Andrology </string>
+              <string>Blood and Andrology</string>
              </property>
             </widget>
            </item>
@@ -690,15 +707,15 @@ padding-left:20px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+padding-left: -5px;
+text-align: left;
 }
 </string>
              </property>
              <property name="text">
-              <string>Operations </string>
+              <string>Operations</string>
              </property>
              <property name="iconSize">
               <size>
@@ -2156,6 +2173,8 @@ border: 1px solid #ccc;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>
