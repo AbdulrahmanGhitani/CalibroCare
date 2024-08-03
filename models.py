@@ -10,9 +10,9 @@ class BaseModel(Model):
         database = database
 
 class Device(BaseModel):
-    brand = TextField()
+    brand = TextField(null=True)
     category = TextField()
-    dept_id = TextField()
+    dept = TextField()
     serial = TextField(primary_key=True)
 
     class Meta:

@@ -23,16 +23,50 @@ class MainApp(QMainWindow, ui):
         self.setupUi(self)
         self.resize(1450, 900)
         self.setWindowFlags(Qt.FramelessWindowHint)
+
         self.tab_buttons_list = [self.operation_btn, self.clinics_btn, self.anesthesia_btn, self.blood_btn,
-                                 self.IVF_btn]
-        self.devices_tables_list = [self.ventilator_table, self.vaporizer_table, self.ultrasound_operation_table,
-                                    self.suction_table, self.monitor_operation_table, self.electrosurgery_table,
-                                    self.diathermy_table, self.defibrilator_table, self.incubator_table,
-                                    self.autoclave_table, self.monitor_sterilization_table,
-                                    self.sphygmomanometer_sterilization_table, self.ecg_sterilization_table,
-                                    self.ultrasound_clinics_table, self.ecg_table, self.sphygmomanometer_clinics_table,
-                                    self.thermometer_table, self.laminar_IVF_table, self.freezing_table,
-                                    self.laminar_blood_table, self.balance_table, self.centrifuge_table]
+                                self.IVF_btn]
+        
+        self.devices_tables_dict = {
+            "Operations": [
+                ("Ventilator", self.ventilator_table),                # 1
+                ("Vaporizer", self.vaporizer_table),                  # 2
+                ("Ultrasound", self.ultrasound_operation_table),  # 3
+                ("Suction", self.suction_table),                      # 4
+                ("Monitor", self.monitor_operation_table),  # 5
+                ("Electrosurgery", self.electrosurgery_table),        # 6
+                ("Diathermy", self.diathermy_table),                  # 7
+                ("Defibrillator", self.defibrilator_table)            # 8
+            ],
+            "Sterilization and Recovery": [
+                ("Incubator", self.incubator_table),                  # 9
+                ("Autoclave", self.autoclave_table),                  # 10
+                ("Monitor", self.monitor_sterilization_table),  # 11
+                ("Sphygmomanometer",
+                 self.sphygmomanometer_sterilization_table),  # 12
+                ("ECG", self.ecg_sterilization_table)   # 13
+            ],
+            "Clinics": [
+                ("Ultrasound", self.ultrasound_clinics_table),  # 14
+                ("ECG", self.ecg_table),                              # 15
+                ("Sphygmomanometer",
+                 self.sphygmomanometer_clinics_table)  # 16
+            ],
+            "IVF lab": [
+                ("Digital Thermometer", self.thermometer_table),              # 17
+                ("Laminar", self.laminar_IVF_table)               # 18
+            ],
+            "Blood and Andrology": [
+                ("Freezing", self.freezing_table),                    # 19
+                ("Laminar", self.laminar_blood_table),          # 20
+                ("Balance", self.balance_table),                      # 21
+                ("Centrifuge", self.centrifuge_table)                 # 22
+            ]
+        }
+
+        self.tables_list = [
+            table for devices in self.devices_tables_dict.values() for _, table in devices]
+
 
         self.add_device_btn_list = [self.add_ventilator_btn, self.add_vaporizer_btn, self.add_ultrasound_operation_btn,
                                     self.add_suction_btn, self.add_monitor_operation_btn, self.add_electrosurgery_btn,
@@ -54,14 +88,24 @@ class MainApp(QMainWindow, ui):
         self.handle_buttons()
         self.ui_changes()
         self.create_tables()
+        self.fill_table()
+
 
         self.clickPosition = None
         # Set the mouse move event handler for upper_frame
         self.upper_frame.mouseMoveEvent = self.move_window
 
         # Departmets ids for database
-        self.depts_ids = [
-            "OR", "CL", "SRA", "BAL", "IVF"
+        self.depts = [
+            "Operations", "Clinics", "Sterilization and Recovery", "Blood and Andrology", "IVF lab"
+        ]
+
+        self.devices_names = [
+            "Ventilator", "Vaporizer", "Suction", "Electrosurgery",
+            "Diathermy", "Defibrillator", "Incubator", "Autoclave", "Monitor",
+            "Sphygmomanometer", "Ultrasound", "ECG",
+            "Digital Thermometer", "Laminar", "Freezing",
+            "Balance", "Centrifuge"
         ]
 
     def mousePressEvent(self, event):
@@ -90,8 +134,8 @@ class MainApp(QMainWindow, ui):
             btn.setIconSize(QSize(40, 40))
 
         # connect each add_row btn with add_row function and with it is table
-        for btn, table in zip(self.add_device_btn_list, self.devices_tables_list):
-            btn.clicked.connect(lambda _, table=table: self.add_row(table))
+        # for btn, table in zip(self.add_device_btn_list, self.tables_list):
+        #     btn.clicked.connect(lambda _, table=table: self.add_row(table))
 
         self.restore_btn.clicked.connect(lambda: self.restore_or_maximize_window())
         self.close_btn.clicked.connect(lambda: self.close())
@@ -119,9 +163,9 @@ class MainApp(QMainWindow, ui):
         self.operation_tabWidget.removeTab(index)
 
     def create_tables(self):
-        for table in (self.devices_tables_list):
+        for table in self.tables_list:
             table.setColumnCount(5)
-            table.setHorizontalHeaderLabels(('Name', 'Serial', 'Shift', '', ''))
+            table.setHorizontalHeaderLabels(('Brand', 'Serial', 'Department', '', ''))
 
             # Stretch the first three columns to fill the available space
             header = table.horizontalHeader()
@@ -132,51 +176,37 @@ class MainApp(QMainWindow, ui):
             for i in range(3, 5):
                 header.setSectionResizeMode(i, QHeaderView.ResizeToContents)  # Column 3
                 table.setColumnWidth(i, 120)
-            table.setStyleSheet("""
-            QTableWidget {
-                border: none;
-            }
-            QTableWidget::item {
-                border: none;
-            }
-            QHeaderView::section {
-                border: none;
-            }
-            QHeaderView::section:horizontal {
-                border: none;
-                text-align: center;
-            }
-            QHeaderView::section:vertical {
-                border: none;
-                text-align: center;
-            }
-        """)
-            self.add_row(table)
+            
+            # self.add_row(table)
 
-    def add_row(self, table):
+    def add_row(self, table, device):
         row = table.rowCount()
         table.setRowCount(row + 1)
         table.setRowHeight(row, 45)
 
-        for col in range(5):  # Add buttons to all columns (0, 1, 2, 3)
-            if col == 3:  # For the last column (index 3), add the delete button
-                button = QPushButton()
-                button.setObjectName(f'delete_btn{row}')
-                button.setIcon(QIcon('icons/trash copy.svg'))
-                button.setIconSize(QSize(30, 30))
-                button.setStyleSheet(
-                    "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
-                table.setCellWidget(row, col, button)
-                button.clicked.connect(lambda _, row=row: self.delete_row(table, row))
-            elif col == 4:
-                button = QPushButton()
-                button.setObjectName(f'delete_btn{row}')
-                button.setIcon(QIcon('icons/open.svg'))
-                button.setIconSize(QSize(30, 30))
-                button.setStyleSheet(
-                    "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
-                table.setCellWidget(row, col, button)
-                button.clicked.connect(lambda _, row=row: self.delete_row(table, row))
+        table.setItem(row, 0, QTableWidgetItem(device.brand))
+        table.setItem(row, 1, QTableWidgetItem(device.serial))
+        table.setItem(row, 2, QTableWidgetItem(device.dept))
+
+        # Delete Button
+        delete_button = QPushButton()
+        delete_button.setObjectName(f'delete_btn{row}')
+        delete_button.setIcon(QIcon('icons/trash copy.svg'))
+        delete_button.setIconSize(QSize(30, 30))
+        delete_button.setStyleSheet(
+            "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
+        table.setCellWidget(row, 3, delete_button)
+        delete_button.clicked.connect(lambda _, row=row: self.delete_row(table, row))
+
+        # Open Button
+        open_button = QPushButton()
+        open_button.setObjectName(f'delete_btn{row}')
+        open_button.setIcon(QIcon('icons/open.svg'))
+        open_button.setIconSize(QSize(30, 30))
+        open_button.setStyleSheet(
+            "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
+        table.setCellWidget(row, 4, open_button)
+        # open_button.clicked.connect(lambda _, row=row: self.open_device(table, row))
 
     def delete_row(self, table, row):
         if row >= 0 and row < table.rowCount():
@@ -204,6 +234,13 @@ class MainApp(QMainWindow, ui):
     # - We remove the widgets/items from the row that is being deleted, including the delete button.
     # - We then update the button object names and click connections for the remaining rows.
     # - By disconnecting the previous click connection and connecting a new one, we ensure that the lambda function captures the correct row index for each button.
+
+    def fill_table(self):
+        for dept in self.devices_tables_dict:
+            for device, table in self.devices_tables_dict[dept]:
+                devices = Device.select().where((Device.category == device) & (Device.dept == dept))
+                for element in devices:
+                    self.add_row(table, element)
 
     ##################################open taps#############################################
     # Define the open_tab function

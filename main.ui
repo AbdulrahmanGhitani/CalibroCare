@@ -315,7 +315,7 @@ QCheckBox{
 }
 /*----------------------------------------------------------------------------------------------*/
 QHeaderView::section{
-	border: 1px solid #ccc;
+	border: none;
 	background-color: rgba(255, 255, 255, 0);
 	font-size: 19px;
 
@@ -326,9 +326,11 @@ QTableWidget{
 	  background-color: #19232D;
 	font-size: 18px;
 	font-weight: normal;
+	text-align: center;
 }
 QTableWidget::item{
-border: 1px solid #ccc;
+border: none;
+text-align: center;
 }
 </string>
   </property>
@@ -837,7 +839,33 @@ text-align: left;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="defibrilator_table">
                      <property name="styleSheet">
-                      <string notr="true"/>
+                      <string notr="true">QHeaderView::section{
+	border: none;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+	text-align: center;
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+text-align: center;
+}
+QTableWidget::item{
+border: none;
+text-align: center;
+}
+
+QHeaderView::section:horizontal {
+                border-top: none;
+text-align: center;
+            }
+            QHeaderView::section:vertical {
+                border-left: none;
+text-align: center;
+}</string>
                      </property>
                     </widget>
                    </item>
@@ -876,10 +904,10 @@ text-align: left;
                     <widget class="QTableWidget" name="diathermy_table">
                      <property name="styleSheet">
                       <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
+	border: none;
 	background-color: rgba(255, 255, 255, 0);
 	font-size: 19px;
-
+	text-align: center;
 }
 
 QTableWidget{
@@ -887,11 +915,21 @@ QTableWidget{
 	  background-color: #19232D;
 	font-size: 18px;
 	font-weight: normal;
+text-align: center;
 }
 QTableWidget::item{
-border: 1px solid #ccc;
+border: none;
+text-align: center;
 }
-</string>
+
+QHeaderView::section:horizontal {
+                border-top: none;
+text-align: center;
+            }
+            QHeaderView::section:vertical {
+                border-left: none;
+text-align: center;
+}</string>
                      </property>
                     </widget>
                    </item>
@@ -929,7 +967,33 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="electrosurgery_table">
                      <property name="styleSheet">
-                      <string notr="true"/>
+                      <string notr="true">QHeaderView::section{
+	border: none;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+	text-align: center;
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+text-align: center;
+}
+QTableWidget::item{
+border: none;
+text-align: center;
+}
+
+QHeaderView::section:horizontal {
+                border-top: none;
+text-align: center;
+            }
+            QHeaderView::section:vertical {
+                border-left: none;
+text-align: center;
+}</string>
                      </property>
                     </widget>
                    </item>
