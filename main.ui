@@ -703,13 +703,13 @@ padding-left: -5px;
              <property name="minimumSize">
               <size>
                <width>200</width>
-               <height>0</height>
+               <height>60</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/caret-down copy.svg);
+ background-image: url(icons/anes.svg);
     background-repeat: no-repeat;
     background-position: left center;
 padding-left:20px;
