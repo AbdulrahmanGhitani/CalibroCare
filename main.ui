@@ -709,10 +709,10 @@ padding-left: -5px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
+ background-image: url(icons/caret-down copy.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left: -5px;
-text-align: left;
+padding-left:20px;
 }
 </string>
              </property>
@@ -839,33 +839,13 @@ text-align: left;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="defibrilator_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: none;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-	text-align: center;
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-text-align: center;
-}
-QTableWidget::item{
-border: none;
-text-align: center;
-}
-
-QHeaderView::section:horizontal {
-                border-top: none;
-text-align: center;
-            }
-            QHeaderView::section:vertical {
-                border-left: none;
-text-align: center;
-}</string>
+                      <string notr="true"/>
+                     </property>
+                     <property name="sortingEnabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="cornerButtonEnabled">
+                      <bool>false</bool>
                      </property>
                     </widget>
                    </item>
@@ -1069,23 +1049,7 @@ text-align: center;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="suction_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1123,23 +1087,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="ultrasound_operation_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1177,23 +1125,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="vaporizer_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1231,23 +1163,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="ventilator_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1309,7 +1225,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -1331,23 +1247,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="sphygmomanometer_clinics_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1385,23 +1285,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="ecg_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1439,23 +1323,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="ultrasound_clinics_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1539,23 +1407,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="ecg_sterilization_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1593,23 +1445,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="sphygmomanometer_sterilization_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1647,23 +1483,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="monitor_sterilization_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1701,23 +1521,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="autoclave_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1755,23 +1559,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="incubator_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1833,7 +1621,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>0</number>
                  </property>
                  <property name="elideMode">
                   <enum>Qt::ElideMiddle</enum>
@@ -1858,23 +1646,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="centrifuge_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1912,23 +1684,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="balance_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -1966,23 +1722,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="laminar_blood_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -2020,23 +1760,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="freezing_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -2098,7 +1822,7 @@ border: 1px solid #ccc;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -2120,23 +1844,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="laminar_IVF_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>
@@ -2174,23 +1882,7 @@ border: 1px solid #ccc;
                    <item row="0" column="0">
                     <widget class="QTableWidget" name="thermometer_table">
                      <property name="styleSheet">
-                      <string notr="true">QHeaderView::section{
-	border: 1px solid #ccc;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-}
-QTableWidget::item{
-border: 1px solid #ccc;
-}
-</string>
+                      <string notr="true"/>
                      </property>
                     </widget>
                    </item>

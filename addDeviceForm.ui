@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>addDeviceForm</class>
+ <widget class="QDialog" name="addDeviceForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>534</width>
+    <height>198</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+  background-color: #19232D;
+  border: 0px solid #455364;
+  padding: 0px;
+  color: white;
+  selection-background-color: #346792;
+  selection-color: #E0E1E3;
+	font-family : Ubuntu;
+font-size: 18px;
+font-weight: bold;
+}
+
+QWidget:disabled {
+  background-color: #19232D;
+  color: #9DA9B5;
+  selection-background-color: #26486B;
+  selection-color: #9DA9B5;
+}
+
+QWidget::item:selected {
+  background-color: #176B87;
+}
+
+QWidget::item:hover:!selected {
+  background-color: rgba(23, 107, 135,50%);
+}
+
+QMainWindow::separator {
+  background-color: #455364;
+  border: 0px solid #19232D;
+  spacing: 0px;
+  padding: 2px;
+}
+
+QMainWindow::separator:hover {
+  background-color: #60798B;
+  border: 0px solid #1A72BB;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+
+QCheckBox {
+  background-color: rgb(0,0,0,0);
+  color: white;
+  spacing: 4px;
+  outline: none;
+  padding-top: 2px;
+
+}
+
+
+/*-------------------------------------------------------------------------------------------*/
+QScrollBar:horizontal {
+  height: 16px;
+  margin: 2px 16px 2px 16px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgb(25, 35, 45);
+}
+
+QScrollBar::handle:horizontal {
+  background-color: #176B87;
+  border: 1px solid #C9CDD0;
+  border-radius: 4px;
+  min-width: 8px;
+}
+
+QScrollBar::handle:horizontal:hover {
+  background-color: rgba(23, 107, 135,80%);
+  border:#4169E1;
+  border-radius: 4px;
+  min-width: 8px;
+}
+
+QScrollBar::handle:horizontal:focus {
+  border: 1px solid red;
+}
+QScrollBar:vertical {
+  background-color: rgb(25, 35, 45);
+  width: 16px;
+  margin: 16px 2px 16px 2px;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+
+QScrollBar::handle:vertical {
+  background-color: #176B87;
+  border: 1px solid #C9CDD0;
+  min-height: 8px;
+  border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+  background-color: rgba(23, 107, 135,80%);
+  border: #9FCBFF;
+  border-radius: 4px;
+  min-height: 8px;
+}
+
+QScrollBar::handle:vertical:focus {
+  border: 1px solid #73C7FF;
+}
+
+
+QScrollBar::add-line:horizontal {
+  margin: 0px 0px 0px 0px;
+  border-image: url(&quot;qss_icons/light/rc/arrow_right_disabled.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: right;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on {
+  border-image: url(&quot;qss_icons/light/rc/arrow_right.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: right;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical {
+  margin: 3px 0px 3px 0px;
+  border-image: url(&quot;qss_icons/light/rc/arrow_down_disabled.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: bottom;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on {
+  border-image: url(&quot;qss_icons/light/rc/arrow_down.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: bottom;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+  margin: 0px 3px 0px 3px;
+  border-image: url(&quot;qss_icons/light/rc/arrow_left_disabled.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: left;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover, QScrollBar::sub-line:horizontal:on {
+  border-image: url(&quot;qss_icons/light/rc/arrow_left.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: left;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+  margin: 3px 0px 3px 0px;
+  border-image: url(&quot;qss_icons/light/rc/arrow_up_disabled.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: top;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover, QScrollBar::sub-line:vertical:on {
+  border-image: url(&quot;qss_icons/light/rc/arrow_up.png&quot;);
+  height: 12px;
+  width: 12px;
+  subcontrol-position: top;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal {
+  background: none;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+  background: none;
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+  background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none;
+}
+
+/*----------------------------------------------------------------------------------------*/
+QPushButton{
+ /*border:2px solid #05B8CC;*/
+ background-color: #176B87;
+padding: 3px 10px;
+ color:rgb(255, 255, 255);
+ border-radius: 10px;
+ font-weight:bold;
+  margin: 5px;
+}
+
+QPushButton::hover{
+ border: 1px solid #176B87;
+ background-color: rgba(23, 107, 135,80%)
+}
+QPushButton:pressed {
+ margin:1px 2px;
+ font-size: 15px;
+}
+/*----------------------------------------------------------------------------------------*/
+QComboBox{
+ border:1px solid #176B87;
+border-radius:5px;
+background-color: #176B87;
+padding: 2px 10px;
+color:white;
+}
+
+
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 22px;
+
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+    image: url(icons/caret-down copy.svg);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox QAbstractItemView {
+border:none;
+    selection-background-color:#176B87;
+}
+/*---------------------------------------------------------------------------------------*/
+QProgressBar{
+	border: 1px solid #05B8CC;
+	border-radius:5px;
+	text-align:center;
+	font-size:18px;
+}
+
+QProgressBar::chunk{
+	background-color: #05B8CC;
+	width: 17px;
+	margin: 0.5px;
+}
+/*----------------------------------------------------------------------------------------*/
+QTabBar::tab {
+    background-color: #455364;
+    border: 3px solid #19232D;
+    border-radius: 10px;
+    padding: 5px;
+    color: #E0E1E3;
+	width:150px;
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: bold;
+}
+QTabBar::tab {
+    background-color: #455364;
+    border: 3px solid #19232D;
+    border-radius: 10px;
+    padding: 4px 8px;
+    color: #E0E1E3;
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: bold;
+}
+QTabBar::tab:selected {
+    background-color:rgba(69,83,100,60%);
+    color: white;
+	margin-top: 3px;
+	border-bottom: 3px solid white;
+}
+QPlotWidget{
+ background-color:(25, 35, 45, 0.8)
+}
+
+
+QCheckBox{
+	font-size: 18px;
+}
+/*----------------------------------------------------------------------------------------------*/
+QHeaderView::section{
+	border: 1px solid #ccc;
+	background-color: rgba(255, 255, 255, 0);
+	font-size: 19px;
+
+}
+
+QTableWidget{
+	border: none;
+	  background-color: #19232D;
+	font-size: 18px;
+	font-weight: normal;
+}
+QTableWidget::item{
+border: 1px solid #ccc;
+}
+QLineEdit{
+border:1px solid white;
+}
+</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0" alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Brand</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="brand_lineEdit"/>
+     </item>
+     <item row="2" column="0" alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Serial</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="serial_lineEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Department</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QComboBox" name="dept_comboBox">
+       <item>
+        <property name="text">
+         <string>Operations</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Clinics</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sterilization and Recovery</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Blood and Andrology</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>IVF lab</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0" alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="name_lineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>addDeviceForm</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>addDeviceForm</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
