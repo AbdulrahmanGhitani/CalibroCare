@@ -210,13 +210,13 @@ QPushButton{
  background-color: #176B87;
 padding: 3px 10px;
  color:rgb(255, 255, 255);
- border-radius: 10px;
+ border-radius: 6px;
  font-weight:bold;
   margin: 5px;
 }
 
 QPushButton::hover{
- border: 1px solid #176B87;
+margin-left: 9px;
  background-color: rgba(23, 107, 135,80%)
 }
 QPushButton:pressed {
@@ -574,7 +574,7 @@ QPushButton:pressed {
           </property>
           <property name="minimumSize">
            <size>
-            <width>60</width>
+            <width>70</width>
             <height>0</height>
            </size>
           </property>
@@ -595,7 +595,7 @@ QPushButton:pressed {
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <property name="leftMargin">
-            <number>19</number>
+            <number>12</number>
            </property>
            <property name="topMargin">
             <number>7</number>
@@ -611,16 +611,16 @@ QPushButton:pressed {
              <property name="minimumSize">
               <size>
                <width>200</width>
-               <height>0</height>
+               <height>60</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
+ background-image: url(icons/ivf.svg);
     background-repeat: no-repeat;
     background-position: left center;
-text-align: left;
-padding-left: -5px;
+padding-left:20px;
 }
 </string>
              </property>
@@ -634,16 +634,16 @@ padding-left: -5px;
              <property name="minimumSize">
               <size>
                <width>310</width>
-               <height>0</height>
+               <height>60</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
+ background-image: url(icons/inpatient.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left: -5px;
-text-align: left;
+padding-left:60px;
 }
 </string>
              </property>
@@ -657,16 +657,16 @@ text-align: left;
              <property name="minimumSize">
               <size>
                <width>200</width>
-               <height>0</height>
+               <height>60</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
+ background-image: url(icons/clinics.svg);
     background-repeat: no-repeat;
     background-position: left center;
-text-align: left;
-padding-left: -5px;
+padding-left:20px;
 }
 </string>
              </property>
@@ -680,16 +680,16 @@ padding-left: -5px;
              <property name="minimumSize">
               <size>
                <width>300</width>
-               <height>0</height>
+               <height>60</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
+ background-image: url(icons/blood.svg);
     background-repeat: no-repeat;
     background-position: left center;
-text-align: left;
-padding-left: -5px;
+padding-left:35px;
 }
 </string>
              </property>
@@ -709,10 +709,10 @@ padding-left: -5px;
              <property name="styleSheet">
               <string notr="true">QPushButton{
  background-color: transparent;
- background-image: url(icons/anes.svg);
+ background-image: url(icons/operation.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+padding-left:40px;
 }
 </string>
              </property>

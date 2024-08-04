@@ -259,12 +259,12 @@ class MainApp(QMainWindow, MainUI):
 
     def toggle_side_bar(self):
         width = self.left_frame.width()
-        if width == 60:
+        if width == 70:
             new_width = 350
             self.close_left_frame.setIcon(
                 QIcon('icons/white_sidebar_fill.svg'))
         else:
-            new_width = 60
+            new_width = 70
             self.close_left_frame.setIcon(
                 QIcon('icons/white_sidebar_stroke.svg'))
         self.animation = QPropertyAnimation(self.left_frame, b"minimumWidth")
