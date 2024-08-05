@@ -210,17 +210,18 @@ QPushButton{
  background-color: #176B87;
 padding: 3px 10px;
  color:rgb(255, 255, 255);
- border-radius: 6px;
+ border-radius: 8px;
  font-weight:bold;
-  margin: 5px;
+}
+QPushButton::hover{
+  background-color:rgb(20, 89, 111);
+color:white;
+border:1px solid white;
 }
 
-QPushButton::hover{
-margin-left: 9px;
- background-color: rgba(23, 107, 135,80%)
-}
+
 QPushButton:pressed {
- margin:1px 2px;
+ margin:1px 1px;
  font-size: 15px;
 }
 /*----------------------------------------------------------------------------------------*/
@@ -296,7 +297,7 @@ QTabBar::tab {
     padding: 4px 8px;
     color: #E0E1E3;
     font-family: Ubuntu;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
 }
 QTabBar::tab:selected {
@@ -317,20 +318,18 @@ QCheckBox{
 QHeaderView::section{
 	border: none;
 	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
+	font-size: 22px;
 
 }
 
 QTableWidget{
 	border: none;
 	  background-color: #19232D;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: normal;
-	text-align: center;
 }
 QTableWidget::item{
 border: none;
-text-align: center;
 }
 </string>
   </property>
@@ -419,11 +418,8 @@ background-color:#0F151C;
 }
 
 QPushButton::hover{
- border: 1px solid #176B87;
-}
-QPushButton:pressed {
- margin:1px 2px;
- font-size: 15px;
+margin-left: 4px;
+border:none;
 }
 </string>
            </property>
@@ -458,10 +454,9 @@ QPushButton:pressed {
  background-color: transparent;
 }
 
-
-QPushButton:pressed {
- margin:1px 2px;
- font-size: 15px;
+QPushButton::hover{
+margin-top: 3px;
+border:none;
 }
 </string>
            </property>
@@ -507,7 +502,15 @@ QPushButton:pressed {
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+            <string notr="true">QPushButton{
+ background-color: transparent;
+}
+
+QPushButton::hover{
+margin-top: 3px;
+border:none;
+}
+</string>
            </property>
            <property name="text">
             <string/>
@@ -536,8 +539,14 @@ QPushButton:pressed {
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgba(255, 255, 255, 0);
+            <string notr="true">QPushButton{
+ background-color: transparent;
+}
 
+QPushButton::hover{
+margin-top: 3px;
+border:none;
+}
 </string>
            </property>
            <property name="text">
@@ -607,7 +616,7 @@ QPushButton:pressed {
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <property name="leftMargin">
-            <number>12</number>
+            <number>14</number>
            </property>
            <property name="topMargin">
             <number>7</number>
@@ -637,6 +646,10 @@ QPushButton:pressed {
     background-position: left center;
 padding-left:20px;
 }
+QPushButton::hover{
+margin-left: 4px;
+border:none;
+}
 </string>
              </property>
              <property name="text">
@@ -662,6 +675,10 @@ padding-left:20px;
     background-repeat: no-repeat;
     background-position: left center;
 padding-left:60px;
+}
+QPushButton::hover{
+margin-left: 4px;
+border:none;
 }
 </string>
              </property>
@@ -689,6 +706,11 @@ padding-left:60px;
     background-position: left center;
 padding-left:20px;
 }
+QPushButton::hover{
+margin-left: 4px;
+border:none;
+}
+
 </string>
              </property>
              <property name="text">
@@ -715,6 +737,10 @@ padding-left:20px;
     background-position: left center;
 padding-left:35px;
 }
+QPushButton::hover{
+margin-left: 4px;
+border:none;
+}
 </string>
              </property>
              <property name="text">
@@ -730,6 +756,14 @@ padding-left:35px;
                <height>60</height>
               </size>
              </property>
+             <property name="font">
+              <font>
+               <family>Ubuntu</family>
+               <pointsize>-1</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -740,6 +774,12 @@ padding-left:35px;
     background-repeat: no-repeat;
     background-position: left center;
 padding-left:40px;
+font -size:24px;
+}
+
+QPushButton::hover{
+margin-left: 4px;
+border:none;
 }
 </string>
              </property>
@@ -838,6 +878,9 @@ padding-left:40px;
                </property>
                <item row="0" column="0">
                 <widget class="QTabWidget" name="operation_tabWidget">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">QTabBar::tab {
 	width:200px;
@@ -893,6 +936,12 @@ padding-left:40px;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_defibrilator_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -957,6 +1006,9 @@ text-align: center;
                      </item>
                      <item row="0" column="1">
                       <widget class="QPushButton" name="add_diathermy_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1021,6 +1073,9 @@ text-align: center;
                      </item>
                      <item row="0" column="1">
                       <widget class="QPushButton" name="add_electrosurgery_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1059,6 +1114,9 @@ text-align: center;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_monitor_operation_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1097,6 +1155,9 @@ text-align: center;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_suction_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1135,6 +1196,9 @@ text-align: center;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_ultrasound_operation_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1173,6 +1237,9 @@ text-align: center;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_vaporizer_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1211,6 +1278,9 @@ text-align: center;
                      </item>
                      <item>
                       <widget class="QPushButton" name="add_ventilator_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1246,9 +1316,12 @@ text-align: center;
                </property>
                <item row="0" column="0">
                 <widget class="QTabWidget" name="clinics_tabWidget">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">QTabBar::tab {
-	width:250px;
+	width:300px;
 }</string>
                  </property>
                  <property name="currentIndex">
@@ -1295,6 +1368,9 @@ text-align: center;
                      </item>
                      <item row="0" column="1">
                       <widget class="QPushButton" name="add_sphygmomanometer_clinics_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1333,6 +1409,9 @@ text-align: center;
                      </item>
                      <item row="0" column="1">
                       <widget class="QPushButton" name="add_ecg_btn">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Add device</string>
                        </property>
@@ -1408,11 +1487,11 @@ text-align: center;
                 <widget class="QTabWidget" name="sterilization_tabWidget">
                  <property name="styleSheet">
                   <string notr="true">QTabBar::tab {
-	width:250px;
+	width:300px;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>4</number>
+                  <number>0</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -1845,11 +1924,11 @@ text-align: center;
                 <widget class="QTabWidget" name="IVF_tabWidget">
                  <property name="styleSheet">
                   <string notr="true">QTabBar::tab {
-	width:250px;
+	width:300px;
 }</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <property name="documentMode">
                   <bool>true</bool>
@@ -1954,7 +2033,6 @@ text-align: center;
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="res.qrc"/>

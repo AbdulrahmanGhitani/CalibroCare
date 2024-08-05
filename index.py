@@ -190,9 +190,20 @@ class MainApp(QMainWindow, MainUI):
         table.setRowCount(row + 1)
         table.setRowHeight(row, 45)
 
-        table.setItem(row, 0, QTableWidgetItem(device.serial))
-        table.setItem(row, 1, QTableWidgetItem(device.category))
-        table.setItem(row, 2, QTableWidgetItem(device.dept))
+        # Create QTableWidgetItem for each column and center-align text
+        serial_item = QTableWidgetItem(device.serial)
+        serial_item.setTextAlignment(Qt.AlignCenter)  # Align text center
+
+        category_item = QTableWidgetItem(device.category)
+        category_item.setTextAlignment(Qt.AlignCenter)
+
+        dept_item = QTableWidgetItem(device.dept)
+        dept_item.setTextAlignment(Qt.AlignCenter)
+
+        # Add items to the table
+        table.setItem(row, 0, serial_item)
+        table.setItem(row, 1, category_item)
+        table.setItem(row, 2, dept_item)
 
         # Delete Button
         delete_button = QPushButton()
