@@ -217,28 +217,42 @@ class MainApp(QMainWindow, MainUI):
     def delete_row(self, table, row):
         if row >= 0 and row < table.rowCount():
             # delete from data_base
-            device = Device.get(serial=table.item(row, 1).text())
-            device.delete_instance()
-            # delete from UI
-            for col in range(4):  # Remove widgets/items from all columns (0, 1, 2, 3)
-                if col == 3:
-                    button = table.cellWidget(row, col)
-                    if button is not None:
-                        button.deleteLater()
-                else:
-                    item = table.item(row, col)
-                    if item is not None:
-                        item = None
-            table.removeRow(row)
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Warning)
+            msg_box.setWindowTitle('Confirm Deletion')
+            msg_box.setText(f"Are you sure you want to delete the device with serial"
+                            f" '{table.item(row, 1).text()}-{table.item(row, 0).text()}'?")
+            msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msg_box.setDefaultButton(QMessageBox.No)
 
-            # Update the button object names and click connections for the remaining rows
-            for i in range(row, table.rowCount()):
-                button = table.cellWidget(i, 3)
-                if button is not None:
-                    button.setObjectName(f'delete_btn{i}')
-                    button.clicked.disconnect()  # Disconnect previous click connection
-                    button.clicked.connect(
-                        lambda _, row=i: self.delete_row(table, row))  # Connect a new click connection
+            # Show the message box and capture the user's response
+            result = msg_box.exec_()
+
+            if result == QMessageBox.Yes:
+                device = Device.get(serial=table.item(row, 0).text())
+                device.delete_instance()
+                # delete from UI
+                for col in range(4):  # Remove widgets/items from all columns (0, 1, 2, 3)
+                    if col == 3:
+                        button = table.cellWidget(row, col)
+                        if button is not None:
+                            button.deleteLater()
+                    else:
+                        item = table.item(row, col)
+                        if item is not None:
+                            item = None
+                table.removeRow(row)
+
+                # Update the button object names and click connections for the remaining rows
+                for i in range(row, table.rowCount()):
+                    button = table.cellWidget(i, 3)
+                    if button is not None:
+                        button.setObjectName(f'delete_btn{i}')
+                        button.clicked.disconnect()  # Disconnect previous click connection
+                        button.clicked.connect(
+                            lambda _, row=i: self.delete_row(table, row))  # Connect a new click connection
+            else:
+                QMessageBox.information(None, "Cancelled", "Deletion was cancelled.", QMessageBox.Ok)
 
     # In the above code:
     # - We remove the widgets/items from the row that is being deleted, including the delete button.
@@ -281,31 +295,53 @@ class FormDialog(QDialog, FormUI):
         super(FormDialog, self).__init__(parent)
         self.setupUi(self)
         self.table = table
+        self.dept = None
 
+        # display department and it is devices when he click add device button
         for dept in self.parent().devices_tables_dict:
             for device, table in self.parent().devices_tables_dict[dept]:
                 if table == self.table:
-                    self.device_name = device
-                    department = dept
-
-        # print in form the name and the department when he click add device button
-        self.name_lineEdit.setText(self.device_name)
-        index = self.dept_comboBox.findText(department)
+                    self.dept = dept
+                    break
+        index = self.dept_comboBox.findText(self.dept)
         if index != -1:
             self.dept_comboBox.setCurrentIndex(index)
+            self.change_devices_according_to_dept()
 
+        # handel buttons
+        self.dept_comboBox.currentTextChanged.connect(self.change_devices_according_to_dept)
         self.buttonBox.accepted.connect(self.saveDevice)
 
-
+    def change_devices_according_to_dept(self):
+        self.device_comboBox.clear()
+        self.dept = self.dept_comboBox.currentText()
+        for device, table in self.parent().devices_tables_dict[self.dept]:
+            self.device_comboBox.addItem(device)
+            if table == self.table:
+                index = self.device_comboBox.findText(device)
+                if index != -1:
+                    self.device_comboBox.setCurrentIndex(index)
     def saveDevice(self):
         # Get data from form
-        if self.serial_lineEdit.text() == "":
-            QMessageBox.critical(None, "Error", "You Should put the serial number", QMessageBox.Ok)
-        else:
-            new_device = Device.create(serial=self.serial_lineEdit.text(), dept=self.dept_comboBox.currentText(),
-                                       category=self.device_name, brand=self.brand_lineEdit.text())
-            self.parent().add_row(self.table, new_device)
+        serial = self.serial_lineEdit.text().strip()
+        if not serial:
+            QMessageBox.critical(None, "Error", "You should enter the serial number", QMessageBox.Ok)
+            return
 
+        try:
+            # Check if the device with the given serial number already exists
+            Device.get(Device.serial == serial)
+            QMessageBox.warning(None, "Warning", "A device with this serial number already exists.", QMessageBox.Ok)
+
+        except Device.DoesNotExist:
+            # add device to database
+            new_device = Device.create(serial=self.serial_lineEdit.text(), dept=self.dept,
+                                       category=self.device_comboBox.currentText(), brand=self.brand_lineEdit.text())
+            # add row to ui
+            for device, table in self.parent().devices_tables_dict[self.dept]:
+                if device == self.device_comboBox.currentText():
+                    self.parent().add_row(table, new_device)
+                    break
 
         self.accept()
 
