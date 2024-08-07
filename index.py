@@ -4,7 +4,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 # import pyqtgraph as pg
 # import numpy as np
-# import pandas as pd
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import sys
 # from pathlib import Path
 from res_rc import *  # Import the resource module
@@ -223,7 +225,7 @@ class MainApp(QMainWindow, MainUI):
         open_button.setStyleSheet(
             "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
         table.setCellWidget(row, 4, open_button)
-        # open_button.clicked.connect(lambda _, row=row: self.open_device(table, row))
+        open_button.clicked.connect(lambda _, row=row: self.open_device_reading(row))
 
     def delete_row(self, table, row):
         if row >= 0 and row < table.rowCount():
@@ -269,6 +271,66 @@ class MainApp(QMainWindow, MainUI):
     # - We remove the widgets/items from the row that is being deleted, including the delete button.
     # - We then update the button object names and click connections for the remaining rows.
     # - By disconnecting the previous click connection and connecting a new one, we ensure that the lambda function captures the correct row index for each button.
+
+    def open_device_reading(self, row):
+        self.stackedWidget.setCurrentIndex(1)
+        data = {
+            "Reference readings (joule)": [5, 10, 20, 50],
+            "2017": [4.9, 9.8, 19.3, 48.4],
+            "2018": [8.314133, 14.19761, 24.43751, 52],
+            "2019": [6.375011, 12.18851, 22.46305, 50.9],
+            "2020": [5.2, 10.1, 20.1, 50.4],
+            "2021": [5.1, 10.3, 21.27883111, 51.27627017],
+            "2022": [5.2, 10.1, 21.15801041, 50.72123629]
+        }
+
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+
+        # Calculate mean and standard deviation for each row
+        df['mean'] = df.mean(axis=1)
+        df['std'] = df.std(axis=1)
+
+        # Calculate UCL and LCL
+        df['UCL'] = df['mean'] + 3 * df['std']
+        df['LCL'] = df['mean'] - 3 * df['std']
+
+        # Create a Matplotlib Figure and Canvas
+        self.figure, self.ax = plt.subplots(figsize=(12, 8))
+        self.canvas = FigureCanvas(self.figure)
+
+        # Embed the canvas into the QWidget
+        self.plot_layout = QVBoxLayout(self.plot_widget_1)
+
+        self.plot_layout.addWidget(self.canvas)
+
+        # Plot the control chart
+        self.plot_control_chart(df)
+
+    def plot_control_chart(self, df):
+        """Plot the control chart."""
+        # Plot each reference reading series with its own x-axis labels
+        for i, reference in enumerate(df["Reference readings (joule)"]):
+            x = [f'{year} ({reference})' for year in df.columns[1:7]]
+            y = df.iloc[i, 1:7]
+            self.ax.plot(x, y, marker='o', label=f'{reference} joules')
+            self.ax.plot(x, [df['mean'][i]] * len(x), linestyle='--', color='orange',
+                         label=f'Mean {reference} joules' if i == 0 else "")
+            self.ax.plot(x, [df['UCL'][i]] * len(x), linestyle='--', color='grey',
+                         label=f'UCL {reference} joules' if i == 0 else "")
+            self.ax.plot(x, [df['LCL'][i]] * len(x), linestyle='--', color='grey',
+                         label=f'LCL {reference} joules' if i == 0 else "")
+
+        # Add plot settings here
+        self.ax.set_title('Control Chart')
+        self.ax.set_xlabel('Year and Reference Reading')
+        self.ax.set_ylabel('Readings')
+        self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
+        self.ax.legend()
+        self.ax.grid(True)
+
+        # Refresh the canvas to show the plot
+        self.canvas.draw()
 
     def fill_table(self):
         for dept in self.devices_tables_dict:
