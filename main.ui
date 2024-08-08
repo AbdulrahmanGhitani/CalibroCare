@@ -322,7 +322,7 @@ QHeaderView::section{
 
 }
 QTableCornerButton::section {
-border: 1px solid white;
+border: none;
  background-color: transparent;  
 }
 
@@ -650,7 +650,9 @@ border:none;
     background-repeat: no-repeat;
     background-position: left center;
 padding-left:20px;
+margin-left:3px;
 }
+
 QPushButton::hover{
 margin-left: 4px;
 border:none;
@@ -709,13 +711,14 @@ border:none;
  background-image: url(icons/clinics.svg);
     background-repeat: no-repeat;
     background-position: left center;
-padding-left:20px;
+padding-left:40px;
+font -size:24px;
 }
+
 QPushButton::hover{
 margin-left: 4px;
 border:none;
 }
-
 </string>
              </property>
              <property name="text">
@@ -741,6 +744,7 @@ border:none;
     background-repeat: no-repeat;
     background-position: left center;
 padding-left:35px;
+margin-left: 2px;
 }
 QPushButton::hover{
 margin-left: 4px;
@@ -765,7 +769,6 @@ border:none;
               <font>
                <family>Ubuntu</family>
                <pointsize>-1</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -986,33 +989,7 @@ border:none;
                        <item row="0" column="0">
                         <widget class="QTableWidget" name="diathermy_table">
                          <property name="styleSheet">
-                          <string notr="true">QHeaderView::section{
-	border: none;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-	text-align: center;
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-text-align: center;
-}
-QTableWidget::item{
-border: none;
-text-align: center;
-}
-
-QHeaderView::section:horizontal {
-                border-top: none;
-text-align: center;
-            }
-            QHeaderView::section:vertical {
-                border-left: none;
-text-align: center;
-}</string>
+                          <string notr="true"/>
                          </property>
                         </widget>
                        </item>
@@ -1053,33 +1030,7 @@ text-align: center;
                        <item row="0" column="0">
                         <widget class="QTableWidget" name="electrosurgery_table">
                          <property name="styleSheet">
-                          <string notr="true">QHeaderView::section{
-	border: none;
-	background-color: rgba(255, 255, 255, 0);
-	font-size: 19px;
-	text-align: center;
-}
-
-QTableWidget{
-	border: none;
-	  background-color: #19232D;
-	font-size: 18px;
-	font-weight: normal;
-text-align: center;
-}
-QTableWidget::item{
-border: none;
-text-align: center;
-}
-
-QHeaderView::section:horizontal {
-                border-top: none;
-text-align: center;
-            }
-            QHeaderView::section:vertical {
-                border-left: none;
-text-align: center;
-}</string>
+                          <string notr="true"/>
                          </property>
                         </widget>
                        </item>
@@ -2058,7 +2009,7 @@ text-align: center;
                <item row="0" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
                  <item>
-                  <widget class="QTableWidget" name="tableWidget"/>
+                  <widget class="QTableWidget" name="readings_table"/>
                  </item>
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -2075,9 +2026,30 @@ text-align: center;
                <item row="1" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_9">
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QPushButton" name="return_btn">
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+ background-color: transparent;
+}
+
+QPushButton::hover{
+margin-left: 4px;
+border:none;
+}
+</string>
+                   </property>
                    <property name="text">
-                    <string>PushButton</string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>icons/return.svg</normaloff>icons/return.svg</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>40</width>
+                     <height>30</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -2095,9 +2067,9 @@ text-align: center;
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="add_year_btn">
                    <property name="text">
-                    <string>PushButton</string>
+                    <string>Add Year</string>
                    </property>
                   </widget>
                  </item>

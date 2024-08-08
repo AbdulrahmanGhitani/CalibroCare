@@ -12,6 +12,8 @@ import sys
 from res_rc import *  # Import the resource module
 from PyQt5.uic import loadUiType
 from models import *
+from collections import defaultdict
+
 
 # Load the main window UI
 MainUI, _ = loadUiType('main.ui')
@@ -100,7 +102,7 @@ class MainApp(QMainWindow, MainUI):
         # Set the mouse move event handler for upper_frame
         self.upper_frame.mouseMoveEvent = self.move_window
 
-        # Departmets ids for database
+        # Departmets for database
         self.depts = [
             "Operations", "Clinics", "Sterilization and Recovery", "Blood and Andrology", "IVF lab"
         ]
@@ -113,6 +115,7 @@ class MainApp(QMainWindow, MainUI):
             "Balance", "Centrifuge"
         ]
 
+        self.return_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.clickPosition = event.globalPos()
@@ -138,7 +141,7 @@ class MainApp(QMainWindow, MainUI):
 
         # connect each add_device btn with open form function and with it is table
         for btn, table in zip(self.add_device_btn_list, self.tables_list):
-            btn.clicked.connect(lambda _, table=table: self.openForm(table))
+            btn.clicked.connect(lambda _, table=table: self.open_form(table))
 
         self.restore_btn.clicked.connect(lambda: self.restore_or_maximize_window())
         self.close_btn.clicked.connect(lambda: self.close())
@@ -146,10 +149,10 @@ class MainApp(QMainWindow, MainUI):
 
         self.operation_tabWidget.tabCloseRequested.connect(self.close_tab)
 
-    def openForm(self, table):
+    def open_form(self, table):
         # Create and show the form dialog
-        formDialog = FormDialog(self, table)
-        formDialog.exec_()
+        form_dialog = FormDialog(self, table)
+        form_dialog.exec_()
 
     # Restore or maximize your window
     def restore_or_maximize_window(self):
@@ -172,19 +175,24 @@ class MainApp(QMainWindow, MainUI):
     # why there are create table and fill table they can be a one function
     def create_tables(self):
         for table in self.tables_list:
-            table.setColumnCount(5)
-            table.setHorizontalHeaderLabels(('Serial', 'Category', 'Department', '', ''))
+            table.setEditTriggers(QTableWidget.NoEditTriggers)
+            table.setSelectionMode(QTableWidget.SingleSelection)
+            table.setSelectionBehavior(QTableWidget.SelectRows)
+
+            table.setColumnCount(6)
+            table.setHorizontalHeaderLabels(('Name', 'Serial', 'Department', 'Recommendation', '', ''))
 
             # Stretch the first three columns to fill the available space
             header = table.horizontalHeader()
-            for i in range(3):  # Columns 0 to 2
+            for i in range(4):  # Columns 0 to 3
                 header.setSectionResizeMode(i, QHeaderView.Stretch)
 
             # Set the last column to a fixed width
-            for i in range(3, 5):
+            for i in range(4, 6):
                 header.setSectionResizeMode(i, QHeaderView.ResizeToContents)  # Column 3
                 table.setColumnWidth(i, 120)
 
+            # table.cellClicked.connect(lambda row, column, table=table: self.open_device_reading(row, table))
             # self.add_row(table)
 
     def add_row(self, table, device):
@@ -196,16 +204,20 @@ class MainApp(QMainWindow, MainUI):
         serial_item = QTableWidgetItem(device.serial)
         serial_item.setTextAlignment(Qt.AlignCenter)  # Align text center
 
-        category_item = QTableWidgetItem(device.category)
-        category_item.setTextAlignment(Qt.AlignCenter)
+        name_item = QTableWidgetItem(device.name)
+        name_item.setTextAlignment(Qt.AlignCenter)
 
         dept_item = QTableWidgetItem(device.dept)
         dept_item.setTextAlignment(Qt.AlignCenter)
 
+        recom_item = QTableWidgetItem("Calibrate it every " + str(device.recommendation) + " year/s")
+        recom_item.setTextAlignment(Qt.AlignCenter)
+
         # Add items to the table
-        table.setItem(row, 0, serial_item)
-        table.setItem(row, 1, category_item)
+        table.setItem(row, 0, name_item)
+        table.setItem(row, 1, serial_item)
         table.setItem(row, 2, dept_item)
+        table.setItem(row, 3, recom_item)
 
         # Delete Button
         delete_button = QPushButton()
@@ -214,7 +226,7 @@ class MainApp(QMainWindow, MainUI):
         delete_button.setIconSize(QSize(30, 30))
         delete_button.setStyleSheet(
             "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
-        table.setCellWidget(row, 3, delete_button)
+        table.setCellWidget(row, 4, delete_button)
         delete_button.clicked.connect(lambda _, row=row: self.delete_row(table, row))
 
         # Open Button
@@ -224,8 +236,9 @@ class MainApp(QMainWindow, MainUI):
         open_button.setIconSize(QSize(30, 30))
         open_button.setStyleSheet(
             "QPushButton{background-color: rgba(255,255,255,0); border:1px solid rgba(255,255,255,0);} QPushButton:pressed{margin-top:2px }")
-        table.setCellWidget(row, 4, open_button)
-        open_button.clicked.connect(lambda _, row=row: self.open_device_reading(row))
+        table.setCellWidget(row, 5, open_button)
+        open_button.clicked.connect(lambda _, row=row: self.open_device_reading(row, device))
+
 
     def delete_row(self, table, row):
         if row >= 0 and row < table.rowCount():
@@ -234,7 +247,7 @@ class MainApp(QMainWindow, MainUI):
             msg_box.setIcon(QMessageBox.Warning)
             msg_box.setWindowTitle('Confirm Deletion')
             msg_box.setText(f"Are you sure you want to delete the device with serial"
-                            f" '{table.item(row, 1).text()}-{table.item(row, 0).text()}'?")
+                            f" '{table.item(row, 0).text()}-{table.item(row, 1).text()}'?")
             msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
             msg_box.setDefaultButton(QMessageBox.No)
 
@@ -245,8 +258,8 @@ class MainApp(QMainWindow, MainUI):
                 device = Device.get(serial=table.item(row, 0).text())
                 device.delete_instance()
                 # delete from UI
-                for col in range(4):  # Remove widgets/items from all columns (0, 1, 2, 3)
-                    if col == 3:
+                for col in range(5):  # Remove widgets/items from all columns (0, 1, 2, 3)
+                    if col == 4:
                         button = table.cellWidget(row, col)
                         if button is not None:
                             button.deleteLater()
@@ -258,7 +271,7 @@ class MainApp(QMainWindow, MainUI):
 
                 # Update the button object names and click connections for the remaining rows
                 for i in range(row, table.rowCount()):
-                    button = table.cellWidget(i, 3)
+                    button = table.cellWidget(i, 4)
                     if button is not None:
                         button.setObjectName(f'delete_btn{i}')
                         button.clicked.disconnect()  # Disconnect previous click connection
@@ -272,28 +285,81 @@ class MainApp(QMainWindow, MainUI):
     # - We then update the button object names and click connections for the remaining rows.
     # - By disconnecting the previous click connection and connecting a new one, we ensure that the lambda function captures the correct row index for each button.
 
-    def open_device_reading(self, row):
+    def device_readings_from_query(self, serial):
+        query = Reading.select().where(Reading.device_serial == serial)
+        query_result = [reading.__data__ for reading in query]
+        unit = ""
+        if query_result[0]["unit"]:
+            unit = query_result[0]["unit"]
+        else:
+            unit = "unitless"
+
+        # Add synthetic year data (this step is just for demonstration purposes)
+        for i, record in enumerate(query_result):
+            record['year'] = 2017 + i % 6
+
+        # Create a defaultdict to hold the aggregated data
+        aggregated_data = defaultdict(lambda: defaultdict(list))
+
+        # Aggregate the data
+        for record in query_result:
+            year = record['year']
+            ref_value = record['ref_value']
+            value = record['value']
+            aggregated_data[ref_value][year].append(value)
+
+        # Calculate the average for each year and reference value
+        final_data = defaultdict(dict)
+        for ref_value, years in aggregated_data.items():
+            for year, values in years.items():
+                final_data[ref_value][year] = sum(values) / len(values)
+
+        # Create a DataFrame from the final_data
+        ref_values = sorted(final_data.keys())
+        years = sorted({year for years in final_data.values() for year in years})
+
+        data_dict = {f"Reference readings \n({unit})": ref_values}
+        for year in years:
+            data_dict[str(year)] = [final_data[ref].get(year, None) for ref in ref_values]
+        print(data_dict)
+        df = pd.DataFrame(data_dict)
+        return df, unit
+
+    def open_device_reading(self, row, device):
         self.stackedWidget.setCurrentIndex(1)
-        data = {
-            "Reference readings (joule)": [5, 10, 20, 50],
-            "2017": [4.9, 9.8, 19.3, 48.4],
-            "2018": [8.314133, 14.19761, 24.43751, 52],
-            "2019": [6.375011, 12.18851, 22.46305, 50.9],
-            "2020": [5.2, 10.1, 20.1, 50.4],
-            "2021": [5.1, 10.3, 21.27883111, 51.27627017],
-            "2022": [5.2, 10.1, 21.15801041, 50.72123629]
-        }
+        # data = {
+        #     "Reference readings (joule)": [5, 10, 20, 50],
+        #     "2017": [4.9, 9.8, 19.3, 48.4],
+        #     "2018": [8.314133, 14.19761, 24.43751, 52],
+        #     "2019": [6.375011, 12.18851, 22.46305, 50.9],
+        #     "2020": [5.2, 10.1, 20.1, 50.4],
+        #     "2021": [5.1, 10.3, 21.27883111, 51.27627017],
+        #     "2022": [5.2, 10.1, 21.15801041, 50.72123629]
+        # }
+
+        df, unit = self.device_readings_from_query(device.serial)
+
+        self.fill_readings_table(df)
 
         # Convert to DataFrame
-        df = pd.DataFrame(data)
+        # df = pd.DataFrame(data)
+        print(df)
 
         # Calculate mean and standard deviation for each row
         df['mean'] = df.mean(axis=1)
         df['std'] = df.std(axis=1)
 
         # Calculate UCL and LCL
-        df['UCL'] = df['mean'] + 3 * df['std']
-        df['LCL'] = df['mean'] - 3 * df['std']
+        df['UCL'] = df['mean'] + 2 * df['std']
+        df['LCL'] = df['mean'] - 2 * df['std']
+
+        print(df)
+
+        for index, row in df.iterrows():
+            for value in row[1:-4]:  # Exclude 'mean', 'std', 'UCL', 'LCL', and 'recom' columns
+                if value > row['UCL'] or value < row['LCL']:
+                    device.recommendation = 1
+                    break
 
         # Create a Matplotlib Figure and Canvas
         self.figure, self.ax = plt.subplots(figsize=(12, 8))
@@ -305,21 +371,21 @@ class MainApp(QMainWindow, MainUI):
         self.plot_layout.addWidget(self.canvas)
 
         # Plot the control chart
-        self.plot_control_chart(df)
+        self.plot_control_chart(df, unit)
 
-    def plot_control_chart(self, df):
+    def plot_control_chart(self, df, unit):
         """Plot the control chart."""
         # Plot each reference reading series with its own x-axis labels
-        for i, reference in enumerate(df["Reference readings (joule)"]):
+        for i, reference in enumerate(df[f"Reference readings \n({unit})"]):
             x = [f'{year} ({reference})' for year in df.columns[1:7]]
             y = df.iloc[i, 1:7]
-            self.ax.plot(x, y, marker='o', label=f'{reference} joules')
+            self.ax.plot(x, y, marker='o', label=f'{reference} {unit}')
             self.ax.plot(x, [df['mean'][i]] * len(x), linestyle='--', color='orange',
-                         label=f'Mean {reference} joules' if i == 0 else "")
+                         label=f'Mean {reference} {unit}' if i == 0 else "")
             self.ax.plot(x, [df['UCL'][i]] * len(x), linestyle='--', color='grey',
-                         label=f'UCL {reference} joules' if i == 0 else "")
+                         label=f'UCL {reference} {unit}' if i == 0 else "")
             self.ax.plot(x, [df['LCL'][i]] * len(x), linestyle='--', color='grey',
-                         label=f'LCL {reference} joules' if i == 0 else "")
+                         label=f'LCL {reference} {unit}' if i == 0 else "")
 
         # Add plot settings here
         self.ax.set_title('Control Chart')
@@ -332,10 +398,32 @@ class MainApp(QMainWindow, MainUI):
         # Refresh the canvas to show the plot
         self.canvas.draw()
 
+    def fill_readings_table(self, df):
+        self.readings_table.setEditTriggers(QTableWidget.NoEditTriggers)
+
+        # Set the number of rows and columns
+        self.readings_table.setRowCount(len(df.columns))
+        self.readings_table.setColumnCount(len(df))
+
+        # Set the horizontal header labels
+        self.readings_table.setVerticalHeaderLabels(df.columns.tolist())
+
+        # Fill the table with DataFrame data
+        for row in range(len(df)):
+            for column in range(len(df.columns)):
+                item = QTableWidgetItem(str(df.iat[row, column]))  # Convert each item to string
+                item.setTextAlignment(Qt.AlignCenter)  # Center align text
+                self.readings_table.setItem(column, row, item)
+
+        # Resize the columns to fit the content
+        header = self.readings_table.verticalHeader()
+        for column in range(len(df.columns)):
+            header.setSectionResizeMode(column, QHeaderView.ResizeToContents)
+
     def fill_table(self):
         for dept in self.devices_tables_dict:
             for device, table in self.devices_tables_dict[dept]:
-                devices = Device.select().where((Device.category == device) & (Device.dept == dept))
+                devices = Device.select().where((Device.name == device) & (Device.dept == dept))
                 for element in devices:
                     self.add_row(table, element)
 
@@ -409,7 +497,7 @@ class FormDialog(QDialog, FormUI):
         except Device.DoesNotExist:
             # add device to database
             new_device = Device.create(serial=self.serial_lineEdit.text(), dept=self.dept,
-                                       category=self.device_comboBox.currentText(), brand=self.brand_lineEdit.text())
+                                       name=self.device_comboBox.currentText(), brand=self.brand_lineEdit.text())
             # add row to ui
             for device, table in self.parent().devices_tables_dict[self.dept]:
                 if device == self.device_comboBox.currentText():
