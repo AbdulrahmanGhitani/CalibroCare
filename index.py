@@ -30,47 +30,37 @@ def device_readings_from_query(serial):
     else:
         unit = "unitless"
 
-    # Add synthetic year data (this step is just for demonstration purposes)
-    for i, record in enumerate(query_result):
-        record['year'] = 2017 + i % 6
-
     # Create a defaultdict to hold the aggregated data
     aggregated_data = defaultdict(lambda: defaultdict(list))
 
-    # Aggregate the data
-    for record in query_result:
-        year = record['year']
-        ref_value = record['ref_value']
-        value = record['value']
-        aggregated_data[ref_value][year].append(value)
+    # Aggregate the data by reference value and year
+    for record in query:
+        year = record.year
+        ref_value = record.ref_value
+        value = record.value
+        aggregated_data[ref_value][year] = value
+        # aggregated_data[ref_value][year].append(value)
 
-    # Calculate the average for each year and reference value
-    final_data = defaultdict(dict)
-    for ref_value, years in aggregated_data.items():
-        for year, values in years.items():
-            final_data[ref_value][year] = sum(values) / len(values)
+    print("*******************************")
+    print(aggregated_data)
+    print("*******************************")
 
-    # Create a DataFrame from the final_data
-    ref_values = sorted(final_data.keys())
-    years = sorted({year for years in final_data.values() for year in years})
+    df = pd.DataFrame.from_records(aggregated_data).transpose()
 
-    data_dict = {f"Reference readings \n({unit})": ref_values}
-    for year in years:
-        data_dict[str(year)] = [final_data[ref].get(year, None) for ref in ref_values]
-    df = pd.DataFrame(data_dict)
+    print(df)
 
     return df, unit
 
 
-def dataframe_to_objects(df, label):
-    dic = df.to_dict(orient='list')
-    unit = list(dic.items())[0][0][21:-1]
+def dataframe_to_objects(df, label, unit):
+    print("Success 1")
 
     name, serial = label.text().split(" - ")
+    print("Success 2")
 
     for index, row in df.iterrows():
-        ref_value = row[f"Reference readings \n({unit})"]
-        for year in df.columns[1:]:  # Skip the first column since it's the reference readings
+        ref_value = index
+        for year in df.columns:  # Skip the first column since it's the reference readings
             value = row[year]
             year_int = int(year)
 
@@ -200,6 +190,7 @@ class MainApp(QMainWindow, MainUI):
 
         self.current_df = pd.DataFrame([])
         self.edit_reading_flag = False
+        self.current_unit = ""
 
         # Connections -------------------------------------------------
         self.return_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
@@ -402,20 +393,20 @@ class MainApp(QMainWindow, MainUI):
 
         self.stackedWidget.setCurrentIndex(1)
 
-        df, unit = device_readings_from_query(device.serial)
+        df, self.current_unit = device_readings_from_query(device.serial)
 
         self.fill_readings_table(df)
 
-        # Calculate mean and standard deviation for each row
+        # # Calculate mean and standard deviation for each row
         df['mean'] = df.mean(axis=1).round(3)
         df['std'] = df.std(axis=1).round(3)
 
-        # Calculate UCL and LCL
+        # # Calculate UCL and LCL
         df['UCL'] = (df['mean'] + 2 * df['std']).round(3)
         df['LCL'] = (df['mean'] - 2 * df['std']).round(3)
 
         for index, row in df.iterrows():
-            for value in row[1:-4]:  # Exclude 'mean', 'std', 'UCL', 'LCL', and 'recom' columns
+            for value in row[:-4]:  # Exclude 'mean', 'std', 'UCL', 'LCL', and 'recom' columns
                 if value > row['UCL'] or value < row['LCL']:
                     device.recommendation = 1
                     break
@@ -429,23 +420,27 @@ class MainApp(QMainWindow, MainUI):
         self.plot_layout.addWidget(self.canvas)
 
         # Plot the control chart
-        self.plot_control_chart(df, unit)
+        self.plot_control_chart(df)
 
         self.current_df = df.drop(columns=['mean', 'std', 'UCL', 'LCL'])
 
-    def plot_control_chart(self, df, unit):
+    def plot_control_chart(self, df):
         """Plot the control chart."""
+        unit = self.current_unit
+        if self.current_unit == "unitless":
+            unit = ""
+
         # Plot each reference reading series with its own x-axis labels
-        for i, reference in enumerate(df[f"Reference readings \n({unit})"]):
-            x = [f'{year} ({reference})' for year in df.columns[1:7]]
-            y = df.iloc[i, 1:7]
+        for i, reference in enumerate(df.index.tolist()):
+            x = [f'{year} ({reference})' for year in df.columns.tolist()[:-4]]
+            y = df.iloc[i, :-4]
             self.ax.plot(x, y, marker='o', label=f'{reference} {unit}')
-            self.ax.plot(x, [df['mean'][i]] * len(x), linestyle='--', color='orange',
-                         label=f'Mean {reference} {unit}' if i == 0 else "")
-            self.ax.plot(x, [df['UCL'][i]] * len(x), linestyle='--', color='grey',
-                         label=f'UCL {reference} {unit}' if i == 0 else "")
-            self.ax.plot(x, [df['LCL'][i]] * len(x), linestyle='--', color='grey',
-                         label=f'LCL {reference} {unit}' if i == 0 else "")
+            self.ax.plot(x, [df['mean'][reference]] * len(x), linestyle='--', color='orange',
+                         label=f'Mean {reference} {unit}')
+            self.ax.plot(x, [df['UCL'][reference]] * len(x), linestyle='--', color='grey',
+                         label=f'UCL {reference} {unit}')
+            self.ax.plot(x, [df['LCL'][reference]] * len(x), linestyle='--', color='grey',
+                         label=f'LCL {reference} {unit}')
 
         # Add plot settings here
         self.ax.set_title('Control Chart')
@@ -466,11 +461,10 @@ class MainApp(QMainWindow, MainUI):
         self.readings_table.setColumnCount(len(df))
 
         # Set the vertical header labels
-        self.readings_table.setVerticalHeaderLabels(df.columns.tolist())
+        self.readings_table.setVerticalHeaderLabels([str(i) for i in df.columns.tolist()])
 
         # Set the horizontal header labels
-        # ref = [str(s) for s in df[df.columns.tolist()[0]].tolist()]
-        # self.readings_table.setHorizontalHeaderLabels(ref)
+        self.readings_table.setHorizontalHeaderLabels([str(i) for i in df.index.tolist()])
 
         # Fill the table with DataFrame data
         for row in range(len(df)):
@@ -493,7 +487,8 @@ class MainApp(QMainWindow, MainUI):
                 value = self.readings_table.item(col_i, row).text()
                 df.at[row, column] = str(value)
 
-        dataframe_to_objects(df, self.device_label)
+        print("Success 0")
+        dataframe_to_objects(df, self.device_label, self.current_unit)
         self.edit_reading_flag = False
 
     def fill_table(self):
