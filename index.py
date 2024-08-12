@@ -53,6 +53,7 @@ def device_readings_from_query(serial):
 
 
 def dataframe_to_objects(df, label, unit):
+    print(df)
     print("Success 1")
 
     name, serial = label.text().split(" - ")
@@ -60,6 +61,7 @@ def dataframe_to_objects(df, label, unit):
 
     for index, row in df.iterrows():
         ref_value = index
+        print("ref_value", ref_value)
         for year in df.columns:  # Skip the first column since it's the reference readings
             value = row[year]
             year_int = int(year)
@@ -481,13 +483,12 @@ class MainApp(QMainWindow, MainUI):
     def edit_readings(self):
         self.edit_reading_flag = True
         df = self.current_df
-
-        for row in range(len(df)):
+        for row_i, row in enumerate(df.index):
             for col_i, column in enumerate(df.columns):
-                value = self.readings_table.item(col_i, row).text()
+                value = self.readings_table.item(col_i, row_i).text()
                 df.at[row, column] = str(value)
 
-        print("Success 0")
+        print("edit \n", df)
         dataframe_to_objects(df, self.device_label, self.current_unit)
         self.edit_reading_flag = False
 
